@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Broken Ranks</title>
+    <link rel="stylesheet" href="estilos.css">
+    <script type="text/javascript" src="lista_productos.js"></script>
+    <script type="text/javascript" defer src="app.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Play&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header id="cabecera">
+        <h1>Broken Ranks</h1>
+    </header>
+    <main>
+        <img src="img/shop.jpg" alt="" id="img_bienvenida">
+        <h2 id="titulo-tienda">Tienda</h2>
+
+        <!-- CARRITO -->
+        <div class="cart-overlay">
+            <aside class="cart">
+              <button class="cart-close">
+                <i class="fas fa-times"></i>
+              </button>
+              <header>
+                <button class="cart-checkout btn">VACIAR BOLSA</button>
+                <h3 class="text-slanted">Tu bolsa</h3>
+              </header>
+              <!-- ITEMS DEL CARRITO -->
+              <div class="cart-items"></div>
+              <footer>
+                <h3 class="cart-total text-slanted">
+                  Total: 0 gold
+                </h3>
+                <button class="cart-checkout btn-comprar">COMPRAR</button>
+              </footer>
+            </aside>
+        </div>
+
+        <section id="tienda">
+            <!-- FILTROS -->
+            <div id="filtros">
+                <input type="text" class="buscador-input" placeholder="Buscar..."/>
+                <h3>Categoría</h3>
+                <div class="categorias">
+                    <button class="categoria-btn">Todas</button>
+                </div>
+                <h3>Fecha</h3>
+                <form class="fecha-form">
+                    <input type="date" class="fecha-filtro1" value="">
+                    <input type="date" class="fecha-filtro2" value="">
+                    <button type="button" class="btn-fecha">Buscar</button>
+                </form>
+                <h3>Precio</h3>
+                <form class="precio-form">
+                    <input type="range" class="precio-filtro" min="0" value="0" max="100"/>
+                </form>
+                <p class="valor-precio">0</p>
+                <button class="carrito-btn">
+                    <i class="fa-solid fa-sack-dollar"></i>
+                </button>
+            </div>
+            <!-- CONTENEDOR PARA PRODUCTOS -->
+            <div class="contenedor_productos"></div>
+            <!-- MENSAJE DE ALERTA -->
+            <div class="alerta"></div>
+        </section>
+
+        <!-- MODAL PARA PRODUCTO -->
+        <div class="modal">
+            <button class="close-btn">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="modal-content">
+                <!-- content -->
+                <img src="" class="main-img" alt="" />
+                <p>id</p>
+                <h4 class="product-name">nombre</h4>
+                <p>precio</p>
+                <button class="product-cart-btn product-icon" >
+                    <i class="fa-solid fa-coins"></i>
+                </button>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <span>DESARROLLADO POR RICARDO ROMERO BUSTOS</span>
+    </footer>
+</body>
+</html>

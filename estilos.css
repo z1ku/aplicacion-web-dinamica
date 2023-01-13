@@ -1,0 +1,370 @@
+*{
+    box-sizing: border-box;
+}
+
+body{
+    margin: 0;
+    background-color: rgb(63, 63, 63);
+    color: whitesmoke;
+    font-family: 'Play', sans-serif;
+}
+
+img{
+    max-width: 100%;
+}
+
+main{
+    min-height: 90vh;
+}
+
+#cabecera h1{
+    background-color: rgb(15, 15, 15);
+    color: whitesmoke;
+    margin: 0;
+    padding: 1rem;
+    text-align: center;
+    font-size: 2.3rem;
+}
+
+#img_bienvenida{
+    margin: 0;
+    height: 35vh;
+    width: 100%;
+    object-fit: cover;
+}
+
+#titulo-tienda{
+    background-color: rgba(15, 15, 15, 0.774);
+    color: whitesmoke;
+    padding: 1rem;
+    text-align: center;
+    font-size: 1.5rem;
+    width: 90%;
+    margin: 1rem auto;
+    border: 1px solid black;
+}
+
+#tienda{
+    width: 90%;
+    display: flex;
+    margin: 2rem auto;
+}
+
+#filtros{
+    background-color: rgba(15, 15, 15, 0.774);
+    width: fit-content;
+    height: fit-content;
+    padding: 1rem;
+    margin-right: 1rem;
+    border: 1px solid black;
+    position: sticky;
+    top: 1rem;
+}
+
+.contenedor_productos{
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.product{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    background-color: rgba(15, 15, 15, 0.774);
+    border: 1px solid black;
+}
+
+.product footer{
+    text-align: center;
+}
+
+.product img{
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    background-color: white;
+}
+
+.product-modal-btn{
+    width: 100%;
+    background-color: white;
+    border: 1px solid black;
+}
+
+.product-modal-btn:hover{
+    background-color: rgb(240, 240, 240);
+}
+
+.product-icons{
+    width: 25%;
+    margin: 1rem auto 0 auto;
+}
+
+.product-name{
+    text-transform: uppercase;
+}
+
+.product-cart-btn{
+    background-color: gold;
+    border: 1px solid black;
+    font-size: 1.5rem;
+    padding: 0.5rem 0.7rem;
+}
+
+.product-cart-btn:hover{
+    background-color: rgb(255, 227, 71);
+}
+
+.modal-content img{
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+}
+
+.cart-item-name{
+    text-transform: uppercase;
+}
+
+.carrito-btn{
+    background-color: gold;
+    border: 1px solid black;
+    font-size: 1.5rem;
+    padding: 0.5rem 0.7rem;
+}
+
+.carrito-btn:hover{
+    background-color: rgb(255, 227, 71);
+}
+
+.buscador-input{
+    padding: 0.5rem;
+}
+
+.categoria-btn{
+    display: block;
+    margin: 0.25em 0;
+    padding: 0.25rem;
+    text-transform: capitalize;
+    background: transparent;
+    color: white;
+    cursor: pointer;
+    border: none;
+}
+
+.fecha-form{
+    display: flex;
+}
+
+.btn-fecha{
+    background-color: white;
+    border: 1px solid black;
+}
+
+.btn-fecha:hover{
+    background-color: rgb(240, 240, 240);
+}
+
+body>footer{
+    background-color: rgb(15, 15, 15);
+    color: whitesmoke;
+    padding: 1rem;
+    text-align: end;
+}
+
+/* CARRITO */
+.cart-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    z-index: -1;
+}
+.cart-overlay.show {
+    opacity: 1;
+    z-index: 100;
+}
+.cart {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    max-width: 400px;
+    padding: 3rem 1rem 0 1rem;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    transform: translateX(100%);
+    overflow: scroll;
+    background-color: rgb(63, 63, 63);
+    border: 1px solid black;
+}
+
+.cart-item{
+    margin: 1rem 0;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    column-gap: 1.5rem;
+    align-items: center;
+}
+
+.cart-item img{
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+
+.show .cart {
+    transform: translateX(0);
+}
+.cart-close {
+    font-size: 2rem;
+    background: transparent;
+    border-color: transparent;
+    position: absolute;
+    top: 0.5rem;
+    left: 1rem;
+    cursor: pointer;
+    color: white;
+}
+.cart header {
+    text-align: center;
+}
+.cart header h3 {
+    font-weight: 500;
+    padding: 1rem;
+    background-color: rgba(15, 15, 15, 0.774);
+}
+.cart-total {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-weight: 500;
+}
+.cart-checkout {
+    display: block;
+    width: 75%;
+    margin: 0 auto;
+    margin-bottom: 2rem;
+    background-color: white;
+    border: 1px solid black;
+    padding: 0.5rem;
+}
+.cart-checkout:hover{
+    background-color: rgb(240, 240, 240);
+}
+
+.btn-comprar{
+    background-color: gold;
+}
+.btn-comprar:hover{
+    background-color: rgb(255, 227, 71);
+}
+
+/* MODAL */
+.modal {
+    position: fixed;
+    z-index: -1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgb(0, 0, 0,0.7);
+    opacity: 0;
+    min-height: 100vh;
+    overflow: scroll;
+}
+
+.modal.open {
+    opacity: 1;
+    z-index: 999;
+}
+
+.close-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 3rem;
+    background: transparent;
+    border-color: transparent;
+    cursor: pointer;
+    color: white;
+}
+
+.modal-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: fit-content;
+    margin: 10rem auto;
+    padding: 1rem;
+    background-color: rgb(63, 63, 63);
+    border: 1px solid black;
+}
+
+/* ALERTA */
+.alerta{
+    position:fixed;
+    left:0px;
+    top: 0px;
+    display: none;
+    width:100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
+  
+.alerta h3{
+    position: absolute;
+    left:35%;
+    top:40%;
+    width:30%;
+    height: 100px;
+    padding: 28px;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+  
+.danger {
+    color: #721c24;
+    display: block;
+}
+.success {
+    color: #155724;
+    display: block;
+}
+
+@media screen and (max-width: 1300px){
+    .contenedor_productos{
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media screen and (max-width: 992px){
+    .contenedor_productos{
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 800px){
+    .contenedor_productos{
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+@media screen and (max-width: 560px){
+    #tienda{
+        flex-direction: column;
+    }
+
+    #filtros{
+        margin-bottom: 1rem;
+        position: initial;
+    }
+}
