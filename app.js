@@ -199,16 +199,21 @@ btn_carrito.addEventListener('click',(evento)=>{
 
     const buscado=lista.find(p=>p.id===id_producto);
 
-    lista_carrito.push(buscado);
+    if(lista_carrito.find(p=>p.id===buscado.id)){
+        mostrarMensaje("El objeto ya está en la bolsa","danger");
+        modal.classList.remove("open");
+    }else{
+        lista_carrito.push(buscado);
 
-    const nuevo_item_carrito=crearItemCarrito(buscado);
-    carrito_productos.appendChild(nuevo_item_carrito);
+        const nuevo_item_carrito=crearItemCarrito(buscado);
+        carrito_productos.appendChild(nuevo_item_carrito);
 
-    localStorage.setItem("carrito",JSON.stringify(lista_carrito));
+        localStorage.setItem("carrito",JSON.stringify(lista_carrito));
 
-    modal.classList.remove("open");
+        modal.classList.remove("open");
 
-    mostrarMensaje("Objeto añadido a la bolsa","success");
+        mostrarMensaje("Objeto añadido a la bolsa","success");
+    }
 });
 
 function crearItemCarrito(datos_item) {
@@ -223,8 +228,10 @@ function crearItemCarrito(datos_item) {
             <div>
               <h4 class="cart-item-name">${datos_item.name}</h4>
               <p class="cart-item-price">Precio: ${datos_item.price} gold</p>
-              <button class="cart-item-remove-btn"><i class="fas fa-times"></i></button>
+              <button class="cart-item-remove-btn">Eliminar</i></button>
+              <input type="number" min="0" class="cantidad-input">
               <button class="cart-item-quantity-btn">+</button>
+              <button class="cart-item-quantity-btn">-</button>
             </div>`;
 
     return nuevo_item;
