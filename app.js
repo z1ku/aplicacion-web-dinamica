@@ -29,6 +29,8 @@ const borrar_carrito=document.querySelector(".cart-borrar");
 const comprar_carrito=document.querySelector(".cart-comprar");
 const total_carrito=document.querySelector(".cart-total");
 
+let total_gold=0;
+
 //CONTROL DE LOS ELEMENTOS EMERGENTES
 cerrar_modal.addEventListener("click",()=>{
     modal.classList.remove("open");
@@ -149,6 +151,7 @@ let lista_carrito = JSON.parse(localStorage.getItem("carrito") ?? "[]");
 
 //RENDERIZAR EL CARRITO INICIALMENTE
 renderizar(lista_carrito,carrito_productos,crearItemCarrito);
+actualizarTotalCarrito(lista_carrito);
 
 //===========FUNCIONES AUXILIARES============================================
 function renderizar(lista_objetos, contenedor_dom, creador_dom) {
@@ -156,6 +159,15 @@ function renderizar(lista_objetos, contenedor_dom, creador_dom) {
     lista_objetos.forEach((item)=>{
         const dom_item=creador_dom(item);
         contenedor_dom.appendChild(dom_item);
+    });
+}
+
+//FUNCION PARA ACTUALIZAR EL TOTAL DEL CARRITO
+function actualizarTotalCarrito(lista_carrito){
+    total_gold=0;
+    lista_carrito.forEach((item)=>{
+        total_gold+=item.price*item.cantidad;
+        total_carrito.innerText="Total: "+total_gold+" gold";
     });
 }
 
@@ -189,6 +201,7 @@ function crearProducto(p) {
         contenido_modal.children[1].innerText=item_buscado.id;
         contenido_modal.children[2].innerText=item_buscado.name;
         contenido_modal.children[3].innerText="Precio: "+item_buscado.price+" gold";
+        contenido_modal.children[4].value=1;
         modal.classList.add("open");
     });
     
@@ -198,20 +211,29 @@ function crearProducto(p) {
 //AÑADIR PRODUCTO AL CARRO
 const btn_carrito = document.querySelector(".product-cart-btn");
 btn_carrito.addEventListener('click',(evento)=>{
-    const id_producto = evento.currentTarget.previousElementSibling.previousElementSibling.previousElementSibling.innerText;
+    const id_producto = evento.currentTarget.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.innerText;
 
     const buscado=lista.find(p=>p.id===id_producto);
+
+    const cantidad=document.querySelector(".product-cantidad-comprar").value;
 
     if(lista_carrito.find(p=>p.id===buscado.id)){
         mostrarMensaje("El objeto ya está en la bolsa","danger");
         modal.classList.remove("open");
+    }else if(cantidad<=0 || cantidad==""){
+        mostrarMensaje("La cantidad tiene que ser 1 o superior","danger");
+        modal.classList.remove("open");
     }else{
-        lista_carrito.push(buscado);
+        lista_carrito.push({...buscado,cantidad:cantidad});
 
         const nuevo_item_carrito=crearItemCarrito(buscado);
         carrito_productos.appendChild(nuevo_item_carrito);
 
         localStorage.setItem("carrito",JSON.stringify(lista_carrito));
+
+        actualizarTotalCarrito(lista_carrito);
+
+        renderizar(lista_carrito,carrito_productos,crearItemCarrito);
 
         modal.classList.remove("open");
 
@@ -228,6 +250,7 @@ borrar_carrito.addEventListener("click",()=>{
         lista_carrito=[];
         localStorage.setItem("carrito",JSON.stringify(lista_carrito));
 
+        total_gold=0;
         total_carrito.innerText="Total: 0 gold";
 
         mostrarMensaje("Bolsa vaciada con éxito","success");
@@ -245,6 +268,7 @@ comprar_carrito.addEventListener("click",()=>{
         lista_carrito=[];
         localStorage.setItem("carrito",JSON.stringify(lista_carrito));
 
+        total_gold=0;
         total_carrito.innerText="Total: 0 gold";
 
         mostrarMensaje("Compra realizada","success");
@@ -262,28 +286,56 @@ function crearItemCarrito(datos_item) {
     <div>
         <h4 class="cart-item-name">${datos_item.name}</h4>
         <p class="cart-item-price">Precio: ${datos_item.price} gold</p>
-        <input type="number" class="cantidad-input" min="0" value="">
+        <p>Unidades: ${datos_item.cantidad}</p>
         <button class="cart-restar-cantidad">-</button>
         <button class="cart-sumar-cantidad">+</button>
         <button class="cart-item-remove-btn">Eliminar</i></button>
     </div>`;
     
-    let cantidad_producto=nuevo_item.querySelector(".cantidad-input");
-
     //SUMAR CANTIDAD DE PRODUCTO
     const btn_sumar_producto=nuevo_item.querySelector(".cart-sumar-cantidad");
-    btn_sumar_producto.addEventListener("click",()=>{
-        let valor=cantidad_producto.value;
-        valor=20;
-        cantidad_producto.setAttribute("value",valor);
+    btn_sumar_producto.addEventListener("click",(evento)=>{
+        const contenido_producto=evento.currentTarget.parentElement.parentElement;
+        const clave_producto=contenido_producto.getAttribute("data-id");
+
+        const buscado=lista_carrito.find(p=>p.id===clave_producto);
+
+        buscado.cantidad++;
+        
+        localStorage.setItem("carrito",JSON.stringify(lista_carrito));
+
+        actualizarTotalCarrito(lista_carrito);
 
         renderizar(lista_carrito,carrito_productos,crearItemCarrito);
     });
 
     //RESTAR CANTIDAD DE PRODUCTO
     const btn_restar_producto=nuevo_item.querySelector(".cart-restar-cantidad");
-    btn_restar_producto.addEventListener("click",()=>{
+    btn_restar_producto.addEventListener("click",(evento)=>{
+        const contenido_producto=evento.currentTarget.parentElement.parentElement;
+        const clave_producto=contenido_producto.getAttribute("data-id");
+
+        const buscado=lista_carrito.find(p=>p.id===clave_producto);
+
+        buscado.cantidad--;
         
+        if(buscado.cantidad>0){
+            localStorage.setItem("carrito",JSON.stringify(lista_carrito));
+
+            actualizarTotalCarrito(lista_carrito);
+
+            renderizar(lista_carrito,carrito_productos,crearItemCarrito);
+        }else{
+            total_gold-=buscado.price;
+            total_carrito.innerText="Total: "+total_gold+" gold";
+
+            const indice=lista_carrito.findIndex(p=>p.id===clave_producto);
+            lista_carrito.splice(indice,1);
+
+            localStorage.setItem("carrito", JSON.stringify(lista_carrito));
+
+            contenido_producto.remove();
+        }
     });
 
     //BORRAR PRODUCTO DEL CARRITO
@@ -291,13 +343,20 @@ function crearItemCarrito(datos_item) {
     btn_borrar_producto.addEventListener("click",(evento)=>{
         const contenido_producto=evento.currentTarget.parentElement.parentElement;
         const clave_producto=contenido_producto.getAttribute("data-id");
-        lista_carrito.findIndex(p=>p.id===clave_producto);
-        lista_carrito.splice(1,0);
+
+        const buscado=lista_carrito.find(p=>p.id===clave_producto);
+
+        total_gold-=buscado.price*buscado.cantidad;
+        total_carrito.innerText="Total: "+total_gold+" gold";
+
+        const indice=lista_carrito.findIndex(p=>p.id===clave_producto);
+        lista_carrito.splice(indice,1);
+
         localStorage.setItem("carrito", JSON.stringify(lista_carrito));
+
         contenido_producto.remove();
-        renderizar(lista_carrito,carrito_productos,crearItemCarrito);
     });
-    
+
     return nuevo_item;
 }
 
