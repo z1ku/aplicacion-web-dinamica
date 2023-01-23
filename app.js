@@ -16,15 +16,18 @@ const inp_fecha1=document.querySelector(".fecha-filtro1");
 const inp_fecha2=document.querySelector(".fecha-filtro2");
 
 //DOM Para el modal
-const modal = document.querySelector(".modal");
-const cerrar_modal = document.querySelector(".close-btn");
-const contenido_modal = document.querySelector(".modal-content");
+const modal=document.querySelector(".modal");
+const cerrar_modal=document.querySelector(".close-btn");
+const contenido_modal=document.querySelector(".modal-content");
 
 //DOM Para el carrito
-const carrito = document.querySelector(".cart-overlay");
-const cerrar_carrito = document.querySelector(".cart-close");
-const carrito_productos = document.querySelector(".cart-items");
-const abrir_carrito = document.querySelector(".carrito-btn");
+const carrito=document.querySelector(".cart-overlay");
+const cerrar_carrito=document.querySelector(".cart-close");
+const carrito_productos=document.querySelector(".cart-items");
+const abrir_carrito=document.querySelector(".carrito-btn");
+const borrar_carrito=document.querySelector(".cart-borrar");
+const comprar_carrito=document.querySelector(".cart-comprar");
+const total_carrito=document.querySelector(".cart-total");
 
 //CONTROL DE LOS ELEMENTOS EMERGENTES
 cerrar_modal.addEventListener("click",()=>{
@@ -216,24 +219,85 @@ btn_carrito.addEventListener('click',(evento)=>{
     }
 });
 
+//BORRAR TODO EL CARRITO
+borrar_carrito.addEventListener("click",()=>{
+    if(lista_carrito.length==0){
+        mostrarMensaje("No has comprado nada todavia","danger");
+        carrito.classList.remove("show");
+    }else{
+        lista_carrito=[];
+        localStorage.setItem("carrito",JSON.stringify(lista_carrito));
+
+        total_carrito.innerText="Total: 0 gold";
+
+        mostrarMensaje("Bolsa vaciada con éxito","success");
+        carrito.classList.remove("show");
+    }
+    renderizar(lista_carrito,carrito_productos,crearItemCarrito);
+});
+
+//FINALIZAR COMPRA
+comprar_carrito.addEventListener("click",()=>{
+    if(lista_carrito.length==0){
+        mostrarMensaje("No has comprado nada todavia","danger");
+        carrito.classList.remove("show");
+    }else{
+        lista_carrito=[];
+        localStorage.setItem("carrito",JSON.stringify(lista_carrito));
+
+        total_carrito.innerText="Total: 0 gold";
+
+        mostrarMensaje("Compra realizada","success");
+        carrito.classList.remove("show");
+    }
+    renderizar(lista_carrito,carrito_productos,crearItemCarrito);
+});
+
 function crearItemCarrito(datos_item) {
     const nuevo_item = document.createElement('article');
     nuevo_item.classList.add('cart-item');
     nuevo_item.setAttribute('data-id', datos_item.id);
     nuevo_item.innerHTML = `
-    <img src="${datos_item.image}"
-              class="cart-item-img"
-              alt="${datos_item.title}"
-            />  
-            <div>
-              <h4 class="cart-item-name">${datos_item.name}</h4>
-              <p class="cart-item-price">Precio: ${datos_item.price} gold</p>
-              <button class="cart-item-remove-btn">Eliminar</i></button>
-              <input type="number" min="0" class="cantidad-input">
-              <button class="cart-item-quantity-btn">+</button>
-              <button class="cart-item-quantity-btn">-</button>
-            </div>`;
+    <img src="${datos_item.image}" class="cart-item-img" alt="${datos_item.name}"/>  
+    <div>
+        <h4 class="cart-item-name">${datos_item.name}</h4>
+        <p class="cart-item-price">Precio: ${datos_item.price} gold</p>
+        <input type="number" class="cantidad-input" min="0" value="">
+        <button class="cart-restar-cantidad">-</button>
+        <button class="cart-sumar-cantidad">+</button>
+        <button class="cart-item-remove-btn">Eliminar</i></button>
+    </div>`;
+    
+    let cantidad_producto=nuevo_item.querySelector(".cantidad-input");
 
+    //SUMAR CANTIDAD DE PRODUCTO
+    const btn_sumar_producto=nuevo_item.querySelector(".cart-sumar-cantidad");
+    btn_sumar_producto.addEventListener("click",()=>{
+        let valor=cantidad_producto.value;
+        valor=20;
+        cantidad_producto.setAttribute("value",valor);
+
+        renderizar(lista_carrito,carrito_productos,crearItemCarrito);
+    });
+
+    //RESTAR CANTIDAD DE PRODUCTO
+    const btn_restar_producto=nuevo_item.querySelector(".cart-restar-cantidad");
+    btn_restar_producto.addEventListener("click",()=>{
+        
+    });
+
+    //BORRAR PRODUCTO DEL CARRITO
+    const btn_borrar_producto=nuevo_item.querySelector(".cart-item-remove-btn");
+    btn_borrar_producto.addEventListener("click",(evento)=>{
+        const contenido_producto=evento.currentTarget.parentElement.parentElement;
+        const clave_producto=contenido_producto.getAttribute("data-id");
+        lista_carrito.findIndex(p=>p.id===clave_producto);
+        lista_carrito.splice(1,0);
+        localStorage.setItem("carrito", JSON.stringify(lista_carrito));
+        contenido_producto.remove();
+        renderizar(lista_carrito,carrito_productos,crearItemCarrito);
+    });
+    
     return nuevo_item;
 }
 
