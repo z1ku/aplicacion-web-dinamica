@@ -118,8 +118,8 @@ main{
 }
 
 .modal-content img{
-    width: 250px;
-    height: 250px;
+    width: 500px;
+    background-color: white;
     object-fit: cover;
 }
 
@@ -329,6 +329,49 @@ body>footer{
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.paginacion{
+    display: flex;
+}
+
+.pagina-btn{
+    text-decoration: none;
+    color: white;
+    margin-right: 1rem;
+}
+
+.pagina-btn:hover{
+    color: gold;
+}
+
+#loading{
+    position:fixed;
+    left:0px;
+    top: 0px;
+    display: none;
+    width:100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
+
+#loading progress{
+    position: absolute;
+    display: inline-block;
+    left:40%;
+    top: 30%;
+    width:20%;
+    height: 10%;
+}
+
+#loading h3{
+    position: absolute;
+    display: inline-block;
+    left:40%;
+    top: 25%;
+    width:20%;
+    color: white;
+    text-align: center;
 }
   
 .danger {

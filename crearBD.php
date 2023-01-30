@@ -43,12 +43,26 @@
                         'https://lojareidasespadas.com/24556-home_default/peto-templario-para-armadura-peto-de-los-caballeros-templarios-la-orden-de-los-pobres-caballeros-de-cristo-latin-pauperes-commil.jpg',
                         'armadura'),
 
+                        ('reclotisftFCb7aHh',
+                        'trozeadora',
+                        '2023/01/02',
+                        188.25,
+                        'https://m.media-amazon.com/images/I/31N26zwjIaL._AC_SY1000_.jpg',
+                        'hacha'),
+
                         ('rec8kkCmSiMkbkiko',
                         'arco largo',
                         '2023/01/08',
                         25.5,
                         'https://mortisdraco.com/wp-content/uploads/2019/10/989626-Rattanbogen-kurz56bb8c8479fd5.jpg',
                         'arco'),
+
+                        ('recquomSiMkbkiko',
+                        'sable pistola',
+                        '2023/01/08',
+                        99.5,
+                        'https://i.seadn.io/gae/pUOxk4cgkjcARhgnHbUD6tw3_u80vaRdk3m0GcaZDIiFVicVAxqzdNodY5oiDCE_TPMO6WUMxAX1k_PaTmHUH6H2KcUDwtOPdhZHfA?auto=format&w=1000',
+                        'espada'),
 
                         ('recBohCqQsot4Q4II',
                         'martillo de guerra',
@@ -64,11 +78,32 @@
                         'https://www.zonadisfraces.com/16568-thickbox_default/hacha-gigante-skeleton.jpg',
                         'hacha'),
 
+                        ('recDeekyZnbpRHpoy',
+                        'leon dorado',
+                        '2023/01/01',
+                        255.35,
+                        'https://www.enfieldsports.com/wp-content/uploads/2021/02/King-Llane-World-Of-Warcraft-Sword.jpg',
+                        'espada'),
+
+                        ('recWAHDERZnbpRHpoy',
+                        'arco elfico',
+                        '2023/01/01',
+                        95.35,
+                        'https://i.pinimg.com/474x/e1/63/c8/e163c865a428ee846eae2cacbe42bbfe.jpg',
+                        'arco'),
+
+                        ('recxaxyfeoFCb7aHh',
+                        'matadioses',
+                        '2023/01/20',
+                        235.5,
+                        'https://m.media-amazon.com/images/I/712x9Y3xnxL.jpg',
+                        'hacha'),
+
                         ('recGD4JRZnbpRHpoy',
                         'espada matadragones',
                         '2023/01/02',
                         359.45,
-                        'https://static.wikia.nocookie.net/el-continente-de-arcadia-campana-de-dnd-5e/images/f/f3/Dragonslayer.jpeg/revision/latest?cb=20190406052316&path-prefix=es',
+                        'https://madswords.us/media/catalog/product/b/e/berserk-guts-dragon-slayer-sword-black.png',
                         'espada'),
 
                         ('recjMK1jgTb2ld7sv',
@@ -85,6 +120,13 @@
                         'https://www.larpdistribution.com/wp-content/uploads/2021/02/MCI-3719.png',
                         'armadura'),
 
+                        ('recOP4a1ctaEJNZhu',
+                        'casco vikingo',
+                        '2023/01/18',
+                        65.35,
+                        'https://i.etsystatic.com/21866880/r/il/d28060/2559748272/il_570xN.2559748272_jp6c.jpg',
+                        'armadura'),
+
                         ('recvKMNR3YFw0bEt3',
                         'gladius',
                         '2023/01/06',
@@ -92,16 +134,25 @@
                         'https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Uncrossed_gladius.jpg/800px-Uncrossed_gladius.jpg',
                         'espada'),
 
+                        ('recHGJ13YFw0bEt4',
+                        'agonía de escarcha',
+                        '2023/01/06',
+                        200.25,
+                        'https://mlyazqwnm7ri.i.optimole.com/cb:mrhB.22221/w:auto/h:auto/q:mauto/f:avif/id:8af6a418af48e62828d71febb3a8cfff/https://www.espadasymas.com/Espada-Frostmourne-Real-de-Acero.jpg',
+                        'espada'),
+
                         ('recxaXFy5IW539sgM',
                         'doomhammer',
                         '2023/01/06',
-                        35.15
-                        'https://static.wikia.nocookie.net/wow/images/8/8d/Doomhammer.jpg/revision/latest?cb=20130815234819&path-prefix=es',
+                        35.15,
+                        'https://mlyazqwnm7ri.i.optimole.com/cb:mrhB.22221/w:auto/h:auto/q:mauto/f:avif/id:aa0d2806a7c1142142541ae819c396a3/https://www.espadasymas.com/MTA0MTQtbWFydGlsbG8tZG9vbWhhbW1lci13b3JsZC1vZi13YXJjcmFmdC05NTMyLmpwZzE5MDgwMjE1NDc0Mw3D3D.jpg',
                         'martillo')
                         ;");
-    $sentencia->execute();
-
-    echo "Datos insertados correctamente<br>--------------------------------------<br>";
+    if($sentencia->execute()){
+        echo "Datos insertados correctamente<br>--------------------------------------<br>";
+    }else{
+        echo $sentencia->error();
+    }
 
     header( "refresh:3;url=index.html" );
 ?>

@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Broken Ranks</title>
     <link rel="stylesheet" href="estilos.css">
-    <script type="text/javascript" src="lista_productos.js"></script>
     <script type="text/javascript" defer src="app.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -64,12 +63,23 @@
                 <button class="carrito-btn">
                     <i class="fa-solid fa-sack-dollar"></i>
                 </button>
+                <h3>Cambiar de página</h3>
+                <div class="paginacion">
+                    <a id="prev" class="pagina-btn" href="">Anterior</a>
+                    <a id="next" class="pagina-btn" href="">Siguiente</a>
+                </div>
             </div>
             <!-- CONTENEDOR PARA PRODUCTOS -->
             <div class="contenedor_productos"></div>
             <!-- MENSAJE DE ALERTA -->
             <div class="alerta"></div>
         </section>
+
+        <!--loading-->
+        <div id="loading">
+            <h3>Cargando</h3><br>
+            <progress max="100"></progress>
+        </div>
 
         <!-- MODAL PARA PRODUCTO -->
         <div class="modal">
