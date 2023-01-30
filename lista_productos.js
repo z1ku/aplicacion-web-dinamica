@@ -42,7 +42,7 @@ const lista=[
         category: "hacha"
     },
     {
-        id: "recDG1JRZnbpRHpoy",
+        id: "recGD4JRZnbpRHpoy",
         name: "espada matadragones",
         date: "2023/01/02",
         price: 359.45,
