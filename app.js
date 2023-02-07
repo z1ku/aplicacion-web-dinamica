@@ -114,7 +114,7 @@ busqueda.addEventListener("keyup",() => {
         //NO FILTRAR  
         filtro=[...lista];    
     } else {
-        filtro=lista.filter(item=>item.name.toLowerCase().includes (texto_busqueda));
+        filtro=lista.filter(item=>item.name.toLowerCase().includes(texto_busqueda));
     }
     //RENDERIZAR EL CONTENIDO EN FUNCION DEL FILTRO
     if(filtro.length===0){
